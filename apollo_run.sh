@@ -1,11 +1,15 @@
 #!/bin/bash
 
+# Function - apollo-run-api-proxy ::: Run api-proxy server on 8081 port
+
 function apollo-run-api-proxy {
   kill $(lsof -t -i:8081)
-  cd ~/apollo/api-proxy
+  cd ~/apollo/qa_env/api-proxy
   npm install
   node app.js &
 }
+
+# Function - apollo-run-single-project ::: Run sigle project 
 
 function apollo-run-single-project {
   echo $1 $2
@@ -19,8 +23,16 @@ function apollo-run-single-project {
   NODE_ENV=testing grunt qa-env &
 }
 
+# Function - apollo-cd-project ::: Change path to current project
+
+function apollo-cd-project {
+  cd ~/apollo/$1/*/CloudFleetManager/ReactApps/apps/$1
+}
+
 # define apollo projects
 declare -a APOLLO_PROJECTS=(maintenance blog crewing miscellaneous disturbance inspections certificates circulars towage)
+
+# Function - apollo-run ::: Run project (or all projects, when you write apollo-run all)
 
 function apollo-run {
   if [ -z ${1+x} ]; then
@@ -44,6 +56,29 @@ function apollo-run {
         "circulars" )      apollo-run-single-project $1 8121;;
         "towage" )         apollo-run-single-project $1 8380;;
       esac
+    fi
+  fi
+}
+
+# Function - apollo-update ::: Update projcet (with git pull (on master branch)) or
+# update (with git pull on master branch) all cores in all projects
+
+function apollo-update {
+  if [ -z ${1+x} ]; then
+    echo 'You should write any project name or core'
+  else
+    if [ "$1" = "core" ]; then
+      for i in "${APOLLO_PROJECTS[@]}"
+      do
+        apollo-cd-project $i
+        cd ../../core
+        git checkout master
+        git pull
+      done
+    else
+      apollo-cd-project $1
+      git checkout master
+      git pull
     fi
   fi
 }

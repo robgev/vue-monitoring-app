@@ -1,4 +1,7 @@
 api-proxy/node_modules
 api-proxy/npm-debug.log
+api-proxy/package-lock.json
 monitoring/node_modules
+monitoring/package-lock.json
 monitoring/npm-debug.log
+package-lock.json

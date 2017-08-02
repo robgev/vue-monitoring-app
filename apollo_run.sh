@@ -30,7 +30,7 @@ function apollo-cd-project {
 }
 
 # define apollo projects
-declare -a APOLLO_PROJECTS=(maintenance blog crewing miscellaneous disturbance inspections certificates circulars towage)
+declare -a APOLLO_PROJECTS=(maintenance blog crewing miscellaneous disturbance inspections certificates circulars towage employees)
 
 # Function - apollo-run ::: Run project (or all projects, when you write apollo-run all)
 
@@ -55,6 +55,7 @@ function apollo-run {
         "certificates" )   apollo-run-single-project $1 8881;;
         "circulars" )      apollo-run-single-project $1 8121;;
         "towage" )         apollo-run-single-project $1 8380;;
+        "employees" )      apollo-run-single-project $1 8228;;
       esac
     fi
   fi
@@ -77,7 +78,11 @@ function apollo-update {
       done
     else
       apollo-cd-project $1
-      git checkout master
+      if [ "$1" = "crewing" ]; then
+        git checkout development
+      else
+        git checkout master
+      fi
       git pull
     fi
   fi

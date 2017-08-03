@@ -18,6 +18,8 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 
+app.use('/api/projects', require('./middlewares/monitoring'));
+
 require('./routes')(app);
 
 const server = http.createServer(app);
@@ -27,4 +29,4 @@ server.listen(process.env.PORT || config.get('port'), _ => {
     if (err) return console.log(err);
     console.log(data);
   })
-})
+});

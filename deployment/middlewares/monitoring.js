@@ -4,7 +4,12 @@ const repositoryEvent = 'push';
 
 module.exports = ({ body: payload }, res, next) => {
 
-	const bitbucketPayload = new BitbucketPayload(payload, repositoryEvent);
+	let bitbucketPayload;
+
+	try {
+		bitbucketPayload = new BitbucketPayload(payload, repositoryEvent);		
+	} catch(err) { /* ... */ }
+
 	const payloadObject = bitbucketPayload.getPurged();
 	const messages = [];
 

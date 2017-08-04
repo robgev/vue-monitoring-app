@@ -6,12 +6,23 @@ const cors = require('cors');
 
 // All API calls need an additional "/api" tag in the URL
 
-const Proxy = ({ target = 'https://staging5.cloudfleetmanager.com' }) => {
+const portsWithStaging4 = ['8884', '8880', '8380', '8089'];
+
+const getPort = host => host.substr(host.lastIndexOf(':') + 1);
+
+const getTarget = port => {
+    if (!port) {
+        return 'https://staging5.cloudfleetmanager.com';
+    }
+
+    const targetStaging = portsWithStaging4.includes(port)? 4 : 5;
+
+    return `https://staging${targetStaging}.cloudfleetmanager.com`;
+}
+
+const Proxy = _ => {
     const app = express();
 
-    const proxyOptions = url.parse(target);
-
-    proxyOptions.cookieRewrite = true;
     app.use(cors({
         credentials: true,
         origin: true
@@ -23,7 +34,7 @@ const Proxy = ({ target = 'https://staging5.cloudfleetmanager.com' }) => {
         next();
     });
 
-    app.use('/signalr', signalRProxy(target, {
+    app.use('/signalr', signalRProxy(getTarget(), {
         proxyReqPathResolver(req) {
             const { originalUrl, url: currentUrl } = req;
 
@@ -39,7 +50,20 @@ const Proxy = ({ target = 'https://staging5.cloudfleetmanager.com' }) => {
         }
     }));
 
-    app.use('/api', proxy(proxyOptions));
+    app.use('/api', (req, res, next) => {
+        
+        let port = getPort(req.headers.origin);
+
+        const targetUrl = getTarget(port);
+
+        const proxyOptions = url.parse(targetUrl);
+
+        proxyOptions.cookieRewrite = true;
+
+        console.log('Log ::: Port ::: ', getPort(req.headers.origin));
+
+        proxy(proxyOptions)(req, res, next);
+    });
 
     return app;
 };
@@ -47,12 +71,13 @@ const Proxy = ({ target = 'https://staging5.cloudfleetmanager.com' }) => {
 // x
 if (!module.parent) {
     const appProxy = Proxy({ origin: 1337 });
-    appProxy.listen(8081, '0.0.0.0', (err) => {
+    const port = 8081;
+    appProxy.listen(port, '0.0.0.0', (err) => {
         if (err) {
             console.log(err);
             return;
         }
-        console.log('Proxy is listening on port ' + 8081);
+        console.log('Proxy is listening on port ' + port);
     });
 }
 

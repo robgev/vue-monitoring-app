@@ -29,4 +29,10 @@ module.exports = function(app) {
 	// towage
 	app.post('/api/projects/towage', require('./towage/').post);
 
+	// core
+	app.post('/api/projects/core', require('./core/').post);
+
+	// employees
+	app.post('/api/projects/employees', require('./employees/').post);
+
 }

@@ -78,11 +78,7 @@ function apollo-update {
       done
     else
       apollo-cd-project $1
-      if [ "$1" = "crewing" ]; then
-        git checkout development
-      else
-        git checkout master
-      fi
+      git checkout qa_env
       git pull
     fi
   fi

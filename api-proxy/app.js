@@ -6,19 +6,23 @@ const cors = require('cors');
 
 // All API calls need an additional "/api" tag in the URL
 
-const portsWithStaging4 = ['8884', '8880', '8380', '8089'];
-
-const getPort = host => host.substr(host.lastIndexOf(':') + 1);
-
-const getTarget = port => {
-    if (!port) {
-        return 'https://staging5.cloudfleetmanager.com';
-    }
-
-    const targetStaging = portsWithStaging4.includes(port)? 4 : 5;
-
-    return `https://staging${targetStaging}.cloudfleetmanager.com`;
+const projectsTargets = {
+    '8087': 'https://staging5.cloudfleetmanager.com', // maintenance
+    '8880': 'https://staging4.cloudfleetmanager.com', // blog
+    '8884': 'https://staging4.cloudfleetmanager.com', // crewing
+    '8882': 'https://staging5.cloudfleetmanager.com', // miscellaneous
+    '8280': 'https://staging5.cloudfleetmanager.com', // disturbance
+    '8089': 'https://staging4.cloudfleetmanager.com', // inspections
+    '8881': 'https://staging5.cloudfleetmanager.com', // certificates
+    '8121': 'https://staging5.cloudfleetmanager.com', // circulars
+    '8380': 'https://staging4.cloudfleetmanager.com', // towage
+    '8228': 'https://staging4.cloudfleetmanager.com', // employees
+    'default': 'https://staging5.cloudfleetmanager.com'
 }
+
+const getPort = origin => origin.substr(origin.lastIndexOf(':') + 1, 4);
+
+const getTarget = (port = 'default') => projectsTargets[port];
 
 const Proxy = _ => {
     const app = express();
@@ -52,15 +56,19 @@ const Proxy = _ => {
 
     app.use('/api', (req, res, next) => {
         
-        let port = getPort(req.headers.origin);
+        const { origin, referer } = req.headers;
+
+        const port = getPort(origin || referer);
 
         const targetUrl = getTarget(port);
 
         const proxyOptions = url.parse(targetUrl);
 
+        proxyOptions.rejectUnauthorized = false;
+
         proxyOptions.cookieRewrite = true;
 
-        console.log('Log ::: Port ::: ', getPort(req.headers.origin));
+        console.log('Log ::: Port ::: ', port);
 
         proxy(proxyOptions)(req, res, next);
     });

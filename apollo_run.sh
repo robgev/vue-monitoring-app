@@ -75,6 +75,8 @@ function apollo-update {
         cd ../../core
         git checkout master
         git pull
+        cd ../
+        npm run update-ui-library
       done
     else
       apollo-cd-project $1

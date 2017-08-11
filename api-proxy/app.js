@@ -13,7 +13,7 @@ const projectsTargets = {
     '8882': 'https://staging5.cloudfleetmanager.com', // miscellaneous
     '8280': 'https://staging5.cloudfleetmanager.com', // disturbance
     '8089': 'https://staging4.cloudfleetmanager.com', // inspections
-    '8881': 'https://staging5.cloudfleetmanager.com', // certificates
+    '8881': 'https://local.hanseaticloft.com', // certificates
     '8121': 'https://staging5.cloudfleetmanager.com', // circulars
     '8380': 'https://staging4.cloudfleetmanager.com', // towage
     '8228': 'https://staging4.cloudfleetmanager.com', // employees
@@ -68,7 +68,10 @@ const Proxy = _ => {
 
         proxyOptions.cookieRewrite = true;
 
-        console.log('Log ::: Port ::: ', port);
+        console.log('****************************************************************');
+        console.log('* Log ::: Port ::: ', port);
+        console.log('* Log ::: Target ::: ', targetUrl);
+        console.log('****************************************************************');
 
         proxy(proxyOptions)(req, res, next);
     });

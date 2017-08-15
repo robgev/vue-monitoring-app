@@ -42,15 +42,17 @@ const Proxy = _ => {
         proxyReqPathResolver(req) {
             const { originalUrl, url: currentUrl } = req;
 
+            const parsedUrl = url.parse(currentUrl);
+
             if (originalUrl.indexOf('connect') !== -1) {
-                return '/signalr' + url.parse(currentUrl).path;
+                return '/signalr' + parsedUrl.path;
             }
 
             if (originalUrl.indexOf('/signalr/send') !== -1) {
-                return url.parse(currentUrl).path.replace('/signalr', '');
+                return parsedUrl.path.replace('/signalr', '');
             }
 
-            return url.parse(req.currentUrl).path;
+            return parsedUrl.path;
         }
     }));
 

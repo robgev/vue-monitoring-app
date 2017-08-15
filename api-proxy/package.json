@@ -13,6 +13,7 @@
     "express": "^4.15.3",
     "express-http-proxy": "1.0.4",
     "http-proxy": "^1.16.2",
+    "node-emoji": "^1.8.1",
     "proxy-middleware": "^0.15.0"
   }
 }

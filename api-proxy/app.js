@@ -3,6 +3,7 @@ const express = require('express');
 const proxy = require('proxy-middleware');
 const signalRProxy = require('express-http-proxy');
 const cors = require('cors');
+const emoji = require('node-emoji')
 
 // All API calls need an additional "/api" tag in the URL
 
@@ -70,7 +71,14 @@ const Proxy = _ => {
 
         proxyOptions.cookieRewrite = true;
 
-        console.log('****************************************************************');
+        console.log(
+            '*********************',
+            emoji.get('coffee'),
+            emoji.get('smoking'),
+            emoji.get('white_check_mark'),
+            'SUCCESS ...',
+            '*********************'
+        );
         console.log('* Log ::: Port ::: ', port);
         console.log('* Log ::: Target ::: ', targetUrl);
         console.log('****************************************************************');

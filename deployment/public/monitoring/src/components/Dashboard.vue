@@ -1,13 +1,16 @@
 <template>
-  <div>
-    <h1 class="title">Projects</h1>
-    <hr />
-    <company-card company-name="HanseaticSoft" logo-url="static/img/hs.png" />
-  </div>
+  <page>
+    <div>
+      <h1 class="title">Projects</h1>
+      <hr />
+      <company-card company-name="HanseaticSoft" logo-url="static/img/hs.png" />
+    </div>
+  </page>
 </template>
 
 <script>
   import CompanyCard from './CompanyCard';
+  import MainLayout from './MainLayout';
 
   export default {
     sockets: {
@@ -32,7 +35,9 @@
     },
 
     components: {
-      'company-card': CompanyCard
+      'company-card': CompanyCard,
+      'page': MainLayout,
+
     }
   }
 </script>

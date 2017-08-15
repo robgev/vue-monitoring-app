@@ -38,18 +38,3 @@ export default {
 }
 
 </style>
-
-<!-- <md-card md-with-hover class="card">
-  <md-card-media-cover md-text-scrim>
-    <md-card-media>
-      <img :src="logoUrl" alt="People">
-      <md-ink-ripple></md-ink-ripple>
-    </md-card-media>
-    <md-card-area>
-      <md-card-header>
-        <div class="md-title">{{ companyName }}</div>
-        <div class="md-subhead">Subtitle here</div>
-      </md-card-header>
-    </md-card-area>
-  </md-card-media-cover>
-</md-card> -->

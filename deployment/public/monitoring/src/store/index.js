@@ -10,12 +10,9 @@ export default new Vuex.Store({
     strict: debug,
 
     state: {
-        count: 0
+        app: 'monitoring'
     },
 
     mutations: {
-        increment(state) {
-            state.count++
-        }
     }
 })

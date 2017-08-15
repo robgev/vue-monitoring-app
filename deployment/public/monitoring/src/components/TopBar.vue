@@ -1,8 +1,8 @@
 <template>
   <md-toolbar class="md-dense">
-    <div class="left" @click="back">back</div>
-    <img class="header-logo" src="static/img/logo.svg" />
-    <h2 class="md-title header-text">Monitoring</h2>
+    <div v-if="detailed" class="left" @click="back">back</div>
+    <img v-if="!detailed" class="header-logo" src="static/img/logo.svg" />
+    <h2 v-if="!detailed" class="md-title header-text">Monitoring</h2>
   </md-toolbar>
 </template>
 
@@ -18,10 +18,6 @@
         type: Boolean,
         default: false
       }
-    },
-    data: () => {
-      console.log(this.detailed)
-      return { det: this.detailed };
     }
   }
 </script>

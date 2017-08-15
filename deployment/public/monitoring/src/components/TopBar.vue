@@ -1,6 +1,9 @@
 <template>
   <md-toolbar class="md-dense">
-    <div v-if="detailed" class="left" @click="back">back</div>
+    <div v-if="detailed" class="left" @click="back">
+      <md-icon>arrow_back</md-icon>
+      <span>Back</span>
+    </div>
     <img v-if="!detailed" class="header-logo" src="static/img/logo.svg" />
     <h2 v-if="!detailed" class="md-title header-text">Monitoring</h2>
   </md-toolbar>
@@ -28,11 +31,11 @@
     box-shadow: $material-shadow-3dp;
     .header-logo {
       max-height: 48px;
-      padding-left: 3rem;
+      padding-left: 1rem;
     }
     .header-text {
       margin-left: auto;
-      padding-right: 4rem;
+      padding-right: 2rem;
       text-transform: uppercase;
       font-weight: bold;
       font-size: large;
@@ -40,8 +43,12 @@
   }
 
   .left {
-    width: 40px;
+    display: flex;
+    align-items: center;
     padding: 0 10px;
     cursor: pointer;
+    span {
+      font-size: 16px;
+    }
   }
 </style>

@@ -14,15 +14,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-}
-
-.content {
-  padding: 2rem 4rem 4rem 4rem;
 }
 
 .slide-fade-enter-active {

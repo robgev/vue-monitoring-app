@@ -23,3 +23,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.content {
+  padding: 2rem 4rem 4rem 4rem;
+}
+</style>

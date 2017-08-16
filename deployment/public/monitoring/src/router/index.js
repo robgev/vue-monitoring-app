@@ -13,13 +13,13 @@ export default new Router({
       component: Dashboard
     },
     {
-      path: '/home',
-      name: 'smth',
+      path: '/projects',
+      name: 'project',
       component: Test
     },
     {
-      path: '/home/:projectid',
-      name: 'test',
+      path: '/projects/:projectid',
+      name: 'projectPage',
       component: Test
     }
   ]

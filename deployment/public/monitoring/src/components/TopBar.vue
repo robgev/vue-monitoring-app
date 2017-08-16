@@ -2,8 +2,7 @@
   <md-toolbar class="md-dense topbar">
     <div v-if="detailed" class="detailed">
       <div class="left" @click="back">
-        <md-icon>arrow_back</md-icon>
-        <span>Back</span>
+        <md-icon class="icon">arrow_back</md-icon>
       </div>
       <md-tabs @change="test" ref="tabs">
         <md-tab
@@ -29,7 +28,7 @@
         const allTabs = this.$refs.tabs.$children;
         const currentTab = allTabs[idx + 1]; // First child is ink ripple which we try to avoid
         const currentID = currentTab.id
-        this.$router.replace({name: 'test', params: { projectid: currentID }})
+        this.$router.replace({name: 'projectPage', params: { projectid: currentID }})
       }
     },
     data() {
@@ -86,9 +85,6 @@
       align-items: center;
       padding-left: 2rem;
       cursor: pointer;
-      span {
-        font-size: 16px;
-      }
     }
   }
 </style>

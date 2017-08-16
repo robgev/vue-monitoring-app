@@ -3,23 +3,33 @@
     <div>
       <h1 class="title">Projects</h1>
       <hr />
-      <company-card company-name="HanseaticSoft" logo-url="static/img/hs.png" />
+      <company-card
+        v-for="company in companyCardData"
+        :key="company.companyName"
+        :company-name="company.companyName"
+        :logo-url="company.logoUrl" />
     </div>
   </page>
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex';
+
   import CompanyCard from './CompanyCard';
   import MainLayout from './MainLayout';
 
   export default {
+    computed: mapGetters([
+      'companyCardData'
+    ]),
+
     sockets: {
       connect() {
         console.log('socket connected')
       },
 
-      customEmit(val) {
-        console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
+      push(data) {
+      	console.log('Log ::: new message ::: ', data);
       }
     },
 
@@ -32,6 +42,10 @@
           this.$store.commit('increment');
           this.$socket.emit('emit_method', {msg: this.$store.state.count});
       }
+    },
+
+    mounted() {
+      console.log(this.$store.state.companies.HanseaticSoft.logoUrl)
     },
 
     components: {

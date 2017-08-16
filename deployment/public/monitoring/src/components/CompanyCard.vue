@@ -1,6 +1,6 @@
 <template>
   <md-card md-with-hover class="card">
-    <router-link to="home">
+    <router-link to="projects">
       <md-card-media-cover>
         <md-card-media md-ratio="4:3">
           <img :src="logoUrl" alt="People">

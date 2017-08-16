@@ -10,3 +10,7 @@ html {
 *, *:before, *:after {
   box-sizing: inherit;
 }
+
+.topbar .md-tabs-content {
+  display: none;
+}

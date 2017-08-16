@@ -14,6 +14,11 @@ export default new Router({
     },
     {
       path: '/home',
+      name: 'smth',
+      component: Test
+    },
+    {
+      path: '/home/:projectid',
       name: 'test',
       component: Test
     }

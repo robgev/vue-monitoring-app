@@ -1,8 +1,18 @@
 <template>
-  <md-toolbar class="md-dense">
-    <div v-if="detailed" class="left" @click="back">
-      <md-icon>arrow_back</md-icon>
-      <span>Back</span>
+  <md-toolbar class="md-dense topbar">
+    <div v-if="detailed" class="detailed">
+      <div class="left" @click="back">
+        <md-icon>arrow_back</md-icon>
+        <span>Back</span>
+      </div>
+      <md-tabs @change="test" ref="tabs">
+        <md-tab
+          v-for="tab in items"
+          :key="tab.id"
+          :id="tab.id"
+          :md-label="tab.label">
+        </md-tab>
+      </md-tabs>
     </div>
     <img v-if="!detailed" class="header-logo" src="static/img/logo.svg" />
     <h2 v-if="!detailed" class="md-title header-text">Monitoring</h2>
@@ -14,7 +24,31 @@
     methods: {
       back() {
         window.history.back()
+      },
+      test(idx) {
+        const allTabs = this.$refs.tabs.$children;
+        const currentTab = allTabs[idx + 1]; // First child is ink ripple which we try to avoid
+        const currentID = currentTab.id
+        this.$router.replace({name: 'test', params: { projectid: currentID }})
       }
+    },
+    data() {
+      return {
+        mounted: false,
+        items: [
+          { id: 'movies', label: 'Movies' },
+          { id: 'music', label: 'Music' },
+          { id: 'books', label: 'Books' },
+          { id: 'pictures', label: 'Pictures' },
+          { id: 'playlists', label: 'Playlists' },
+          { id: 'albums', label: 'Albums' },
+          { id: 'settings', label: 'Settings' },
+          { id: 'account', label: 'Account' },
+        ]
+      }
+    },
+    mounted() {
+      console.log(this.$route.params)
     },
     props: {
       detailed: {
@@ -28,6 +62,7 @@
 <style lang="scss" scoped>
   @import "..//assets/variables.scss";
   .md-dense {
+    padding: 0;
     box-shadow: $material-shadow-3dp;
     .header-logo {
       max-height: 48px;
@@ -41,14 +76,19 @@
       font-size: large;
     }
   }
-
-  .left {
+  .detailed {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
-    padding: 0 10px;
-    cursor: pointer;
-    span {
-      font-size: 16px;
+    .left {
+      display: flex;
+      align-items: center;
+      padding-left: 2rem;
+      cursor: pointer;
+      span {
+        font-size: 16px;
+      }
     }
   }
 </style>

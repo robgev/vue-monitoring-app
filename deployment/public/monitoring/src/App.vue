@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <transition name="slide-fade">
-      <navigation>
-        <router-view></router-view>
-      </navigation>
+      <router-view></router-view>
     </transition>
   </div>
 </template>
@@ -14,7 +12,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -22,17 +20,23 @@ export default {
 }
 
 .slide-fade-enter-active {
-  transition: all .3s;
-  display: none;
+  transition: all .3s ease;
 }
 
 .slide-fade-leave-active {
-  transition: all .3s;
+  transition: all .3s ease;
 }
 
-.slide-fade-enter, .slide-fade-leave-to {
-  transform: translateX(-10px);
+.slide-fade-enter {
+  transform: translateY(10px);
   opacity: 0;
+}
+
+.slide-fade-leave-to {
+  opacity: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
 }
 
 </style>

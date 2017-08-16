@@ -12,10 +12,6 @@ import store from './store';
 
 import './socket';
 
-import Navigation from 'vue-navigation'
-
-Vue.use(Navigation, {router, store, keyName: 'nav'});
-
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

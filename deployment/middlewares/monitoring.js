@@ -1,21 +1,17 @@
-const BitbucketPayload = require('bitbucket-payload');
+const converter = require('../libs/converter-bitbucket-payload.js');
 
-const repositoryEvent = 'push';
-
-module.exports = ({ body: payload }, res, next) => {
+module.exports = ({ body: payload, app }, res, next) => {
 
 	try {
-		const bitbucketPayload = new BitbucketPayload(payload, repositoryEvent);
-		const payloadObject = bitbucketPayload.getPurged();
-		const messages = [];
+		const convertedData = converter.set(payload).getInfo(['push', 'commits']);
 
-		for (const commit of payloadObject.commits) {
-			messages.push(commit.message);
-		}
+		console.log('Log ::: Converted Data ::: ', convertedData);
 
-		console.log('Log ::: payloadObject ::: ', payloadObject);
-		console.log('Log ::: messages ::: ', messages);		
-	} catch(err) { /* ... */ }
+		const { io } = app.settings;
+
+		// broadcast
+		io.sockets.emit('push', convertedData);
+	} catch(err) { console.log('Log ::: Error ::: ', err) }
 
 	next();
 }

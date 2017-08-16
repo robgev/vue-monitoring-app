@@ -30,3 +30,7 @@ server.listen(process.env.PORT || config.get('port'), _ => {
     console.log(data);
   })
 });
+
+const io = require('./socket')(server);
+
+app.set('io', io);

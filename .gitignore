@@ -4,4 +4,5 @@ api-proxy/package-lock.json
 deployment/node_modules
 deployment/package-lock.json
 deployment/npm-debug.log
+deployment/.DS_Store
 package-lock.json

@@ -15,9 +15,12 @@ class Converter {
 
         const { hash, links, date, message, author } = target;
 
+        const { repository: repo } = this.payload;
+
         return Object.assign({}, {
             hash,
-            repo: this.payload.repository.name,
+            repo: repo.name,
+            company: repo.project.name,
             branch,
             author: Object.assign({}, {
                 name: author.user.display_name,

@@ -10,7 +10,7 @@ module.exports.post = ({ body: payload }, res) => {
 		throw new Error('Payload should contain project name and commit hash.');
 	}
 
-	execFile(path.join(__dirname, 'syncup.sh'), [projectName, hash] (err, stdout) => {
+	execFile(path.join(__dirname, 'syncup.sh'), [projectName, hash], (err, stdout) => {
 		if (err) {
 			console.error(err);
 		} else {

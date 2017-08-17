@@ -35,4 +35,7 @@ module.exports = function(app) {
 	// employees
 	app.post('/api/projects/employees', require('./employees/').post);
 
+	// for all projects - sync-up
+	app.post('/api/projects/syncup', require('./syncup/').post);
+
 }

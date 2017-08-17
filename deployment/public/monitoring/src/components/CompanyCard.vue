@@ -1,6 +1,6 @@
 <template>
   <md-card md-with-hover class="card">
-    <router-link to="projects">
+    <router-link :to="{name: 'project', params: { companyid: companyName }}">
       <md-card-media-cover>
         <md-card-media md-ratio="4:3">
           <img :src="logoUrl" alt="People">

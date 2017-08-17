@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex';
+  import { mapGetters } from 'vuex';
 
   import CompanyCard from './CompanyCard';
   import MainLayout from './MainLayout';
@@ -37,7 +37,6 @@
 
     methods: {
       clickButton(e) {
-          console.log(this.$store.state.count);
           // $socket is socket.io-client instance
           this.$store.commit('increment');
           this.$socket.emit('emit_method', {msg: this.$store.state.count});
@@ -51,7 +50,6 @@
     components: {
       'company-card': CompanyCard,
       'page': MainLayout,
-
     }
   }
 </script>

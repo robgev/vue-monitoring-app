@@ -4,7 +4,7 @@ const { execFile } = require('child_process');
 
 module.exports.post = ({ body: payload }, res) => {
 
-	execFile(path.join(__dirname, 'maintenance.sh'), (err, stdout) => {
+	execFile(path.join(__dirname, 'syncup.sh'), (err, stdout) => {
 		if (err) {
 			console.error(err);
 		} else {

@@ -13,29 +13,32 @@ const getCompanyCardData = ({ companies }) => (
   }))
 )
 
-export default new Vuex.Store({
-    state: {
-        app: 'monitoring',
-        companies: {
-            'HanseaticSoft': {
-              projects: {
-                'maintenance': { changes: {}, id: 'maintenance', tabLabel: 'maintenance' },
-                'blog': { changes: {}, id: 'blog', tabLabel: 'blog' },
-                'crewing': { changes: {}, id: 'crewing', tabLabel: 'crewing' },
-                'miscellaneous': { changes: {}, id: 'miscellaneous', tabLabel: 'miscellaneous' },
-                'disturbance': { changes: {}, id: 'disturbance', tabLabel: 'disturbance' },
-                'inspections': { changes: {}, id: 'inspections', tabLabel: 'inspections' },
-                'certificates': { changes: {}, id: 'certificates', tabLabel: 'certificates' },
-                'circulars': { changes: {}, id: 'circulars', tabLabel: 'circulars' },
-                'towage': { changes: {}, id: 'towage', tabLabel: 'towage' },
-                'employees': { changes: {}, id: 'employees', tabLabel: 'employees' }
-              },
-              logoUrl: 'static/img/hs.png'
-            }
+const state = {
+    app: 'monitoring',
+    companies: {
+        'HanseaticSoft': {
+          projects: {
+            'maintenance': { changes: {}, id: 'maintenance', tabLabel: 'maintenance' },
+            'blog': { changes: {}, id: 'blog', tabLabel: 'blog' },
+            'crewing': { changes: {}, id: 'crewing', tabLabel: 'crewing' },
+            'miscellaneous': { changes: {}, id: 'miscellaneous', tabLabel: 'miscellaneous' },
+            'disturbance': { changes: {}, id: 'disturbance', tabLabel: 'disturbance' },
+            'inspections': { changes: {}, id: 'inspections', tabLabel: 'inspections' },
+            'certificates': { changes: {}, id: 'certificates', tabLabel: 'certificates' },
+            'circulars': { changes: {}, id: 'circulars', tabLabel: 'circulars' },
+            'towage': { changes: {}, id: 'towage', tabLabel: 'towage' },
+            'employees': { changes: {}, id: 'employees', tabLabel: 'employees' }
+          },
+          logoUrl: 'static/img/hs.png'
         }
-    },
-
-    getters: {
-      companyCardData: state => getCompanyCardData(state)
     }
+};
+
+const getters = {
+  companyCardData: state => getCompanyCardData(state)
+}
+
+export default new Vuex.Store({
+    state,
+    getters,
 })

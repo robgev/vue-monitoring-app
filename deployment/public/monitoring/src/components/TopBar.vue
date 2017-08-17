@@ -36,7 +36,6 @@
       const companyData = this.$store.state.companies && companyName ? this.$store.state.companies[companyName] : [];
       const { projects } = companyData;
       return {
-        mounted: false,
         items: projects,
       }
     },
@@ -68,12 +67,8 @@
   }
   .detailed {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
     align-items: center;
     .left {
-      display: flex;
-      align-items: center;
       padding-left: 2rem;
       cursor: pointer;
     }

@@ -9,6 +9,15 @@
 <script>
 export default {
   name: 'app',
+  sockets: {
+    connect() {
+      console.log('socket connected')
+    },
+
+    push(data) {
+      console.log('Log ::: new message ::: ', data);
+    }
+  },
 }
 </script>
 

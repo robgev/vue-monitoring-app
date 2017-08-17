@@ -13,45 +13,21 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from 'vuex';
+  import { mapGetters } from 'vuex';
 
   import CompanyCard from './CompanyCard';
   import MainLayout from './MainLayout';
 
   export default {
+    name: 'dashboard',
+
     computed: mapGetters([
       'companyCardData'
     ]),
 
-    sockets: {
-      connect() {
-        console.log('socket connected')
-      },
-
-      push(data) {
-      	console.log('Log ::: new message ::: ', data);
-      }
-    },
-
-    name: 'hello',
-
-    methods: {
-      clickButton(e) {
-          console.log(this.$store.state.count);
-          // $socket is socket.io-client instance
-          this.$store.commit('increment');
-          this.$socket.emit('emit_method', {msg: this.$store.state.count});
-      }
-    },
-
-    mounted() {
-      console.log(this.$store.state.companies.HanseaticSoft.logoUrl)
-    },
-
     components: {
       'company-card': CompanyCard,
       'page': MainLayout,
-
     }
   }
 </script>

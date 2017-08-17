@@ -3,7 +3,7 @@
     <div>
       <h1 class="title">Test</h1>
       <hr />
-      <p>This is awesome</p>
+      <p>{{ this.$route.params }}</p>
     </div>
   </page>
 </template>

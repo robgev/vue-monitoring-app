@@ -4,12 +4,12 @@
       <div class="left" @click="back">
         <md-icon class="icon">arrow_back</md-icon>
       </div>
-      <md-tabs @change="test" ref="tabs">
+      <md-tabs @change="onTabChange" ref="tabs">
         <md-tab
           v-for="tab in items"
           :key="tab.id"
           :id="tab.id"
-          :md-label="tab.label">
+          :md-label="tab.tabLabel">
         </md-tab>
       </md-tabs>
     </div>
@@ -24,7 +24,7 @@
       back() {
         window.history.back()
       },
-      test(idx) {
+      onTabChange(idx) {
         const allTabs = this.$refs.tabs.$children;
         const currentTab = allTabs[idx + 1]; // First child is ink ripple which we try to avoid
         const currentID = currentTab.id
@@ -32,22 +32,12 @@
       }
     },
     data() {
+      const companyName = this.$route.params.companyid;
+      const companyData = this.$store.state.companies && companyName ? this.$store.state.companies[companyName] : [];
+      const { projects } = companyData;
       return {
-        mounted: false,
-        items: [
-          { id: 'movies', label: 'Movies' },
-          { id: 'music', label: 'Music' },
-          { id: 'books', label: 'Books' },
-          { id: 'pictures', label: 'Pictures' },
-          { id: 'playlists', label: 'Playlists' },
-          { id: 'albums', label: 'Albums' },
-          { id: 'settings', label: 'Settings' },
-          { id: 'account', label: 'Account' },
-        ]
+        items: projects,
       }
-    },
-    mounted() {
-      console.log(this.$route.params)
     },
     props: {
       detailed: {
@@ -77,12 +67,8 @@
   }
   .detailed {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
     align-items: center;
     .left {
-      display: flex;
-      align-items: center;
       padding-left: 2rem;
       cursor: pointer;
     }

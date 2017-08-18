@@ -9,10 +9,15 @@ module.exports = ({ body: payload, app, uuid }, res, next) => {
 
 		console.log('Log ::: Converted Data ::: ', convertedData);
 
-		const { io } = app.settings;
+		// send only when change in master branch
 
-		// broadcast
-		io.sockets.emit('push', convertedData);
+		if (convertedData.push.branch === 'master') {
+			const { io } = app.settings;
+
+			// broadcast
+			io.sockets.emit('push', convertedData);
+		}
+
 	} catch(err) { console.log('Log ::: Error ::: ', err) }
 
 	next();

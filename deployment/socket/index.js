@@ -116,6 +116,7 @@ module.exports = function(server) {
 						name: 'Malincyan Pavel',
 						avatar: 'https://bitbucket.org/account/pavelMalincyan/avatar/32/'
 					},
+					company: 'Hanseaticsoft',
 					message: 'Merged in bug-fix (pull request #59)\n\nBug fix\n',
 					date: '2017-08-16T15:42:12+00:00',
 					links: {
@@ -129,11 +130,16 @@ module.exports = function(server) {
 			            "href": "https://bitbucket.org/account/apollobytes/avatar/32/"
 			          }
 			        }
-				}
+				},
+				uuid: "{c59214c5-b176-4982-8bd7-330170040a5a}"
 			}
 		)
 
   	});
+
+	io.sockets.on('error', function(err) {
+		console.log('err');
+	});
 
   	return io;
 }

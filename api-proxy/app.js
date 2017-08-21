@@ -14,11 +14,11 @@ const projectsTargets = {
     '8882': 'https://staging5.cloudfleetmanager.com', // miscellaneous
     '8280': 'https://staging5.cloudfleetmanager.com', // disturbance
     '8089': 'https://staging4.cloudfleetmanager.com', // inspections
-    '8881': 'https://local.hanseaticloft.com', // certificates
+    '8881': 'https://staging4.cloudfleetmanager.com', // certificates
     '8121': 'https://staging5.cloudfleetmanager.com', // circulars
     '8380': 'https://staging4.cloudfleetmanager.com', // towage
     '8228': 'https://staging4.cloudfleetmanager.com', // employees
-    'default': 'https://staging5.cloudfleetmanager.com'
+    'default': 'https://staging5.cloudfleetmanager.com' // default
 }
 
 const getPort = origin => origin.substr(origin.lastIndexOf(':') + 1, 4);

@@ -9,7 +9,8 @@
           v-for="tab in items"
           :key="tab.id"
           :id="tab.id"
-          :md-label="tab.tabLabel">
+          :md-label="tab.tabLabel"
+          :md-options="{code: tab.code}">
         </md-tab>
       </md-tabs>
     </div>
@@ -27,8 +28,8 @@
       onTabChange(idx) {
         const allTabs = this.$refs.tabs.$children;
         const currentTab = allTabs[idx + 1]; // First child is ink ripple which we try to avoid
-        const currentID = currentTab.id
-        this.$router.replace({name: 'projectPage', params: { projectid: currentID }})
+        const { id: currentID, mdOptions: { code } } = currentTab
+        this.$router.replace({name: 'projectPage', params: { projectid: currentID }, query: { code }})
       }
     },
     data() {

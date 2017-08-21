@@ -5,7 +5,7 @@ module.exports = ({ body: payload, app, uuid }, res, next) => {
 	try {
 		const convertedData = converter.set(payload).getInfo(['push', 'commits']);
 
-		convertedData.uuid = uuid;
+		convertedData.uuid = convertedData.push.hash;
 
 		console.log('Log ::: Converted Data ::: ', convertedData);
 

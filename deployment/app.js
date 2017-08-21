@@ -36,4 +36,3 @@ server.listen(process.env.PORT || config.get('port'), _ => {
 const io = require('./socket')(server);
 
 app.set('io', io);
-

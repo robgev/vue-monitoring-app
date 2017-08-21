@@ -17,5 +17,4 @@ Vue.material.registerTheme('default', {
     hue: 'A200',
   },
   warn: 'red',
-  background: 'grey'
 })

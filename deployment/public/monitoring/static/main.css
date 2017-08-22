@@ -15,6 +15,10 @@ hr {
   margin: 10px
 }
 
+.md-card .md-card-header:last-child {
+    margin-bottom: 0px !important;
+}
+
 .topbar .md-tabs-content {
   display: none;
 }

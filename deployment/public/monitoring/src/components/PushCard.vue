@@ -21,7 +21,7 @@
           <div class="md-title">Commit {{commit.message}} by {{commit.author.name}}</div>
           <div class="md-subhead">Commited on {{new Date(commit.date).toLocaleString()}} Hash: {{commit.hash}}</div>
         </md-card-header-text>
-        <md-button class="md-fab md-clean" title="Sync with master">
+        <md-button class="md-fab md-clean" title="Checkout to this commit">
           <md-icon>sync</md-icon>
         </md-button>
       </md-card-header>

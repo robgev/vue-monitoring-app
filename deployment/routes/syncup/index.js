@@ -7,13 +7,13 @@ module.exports.post = ({ body: payload }, res) => {
 
 	const { projectName, hash } = payload;
 
-	if (!projectName || !hash) {
+	if (!projectName) {
 		throw new Error('Payload should contain project name and commit hash.');
 	}
 
 	const spinner = require('ora')(`Sync up "${projectName}" project ...`);
 
-	execFile(path.join(__dirname, 'syncup.sh'), [projectName, hash], (err, stdout) => {
+	execFile(path.join(__dirname, 'syncup.sh'), [projectName, hash || ''], (err, stdout) => {
 		if (err) {
 			console.error(err);
 			spinner.fail(`Couldn\'t sync up project "${projectName}"`);

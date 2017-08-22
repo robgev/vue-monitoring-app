@@ -6,4 +6,6 @@ apollo-cd-project $1
 
 git reset --hard origin/master
 
-git checkout $2
+if [ ${1+x} ]; then
+	git checkout $2
+fi

@@ -1,16 +1,18 @@
 <template>
-  <md-card style="margin: 20px;">
-    <md-card-header>
-      <md-card-header-text>
-        <div class="md-title">{{name}} pushed to repo {{repo}}</div>
-        <div class="md-subhead">{{message}} on {{new Date(date).toLocaleString()}}</div>
-      </md-card-header-text>
+  <div class='push-card-container'>
+    <md-card>
+      <md-card-header>
+        <md-card-header-text>
+          <div class="md-title">{{name}} pushed to repo {{repo}}</div>
+          <div class="md-subhead">{{message}} on {{new Date(date).toLocaleString()}}</div>
+        </md-card-header-text>
 
-      <md-card-media>
-        <img :src="avatar" alt="People">
-      </md-card-media>
-    </md-card-header>
-  </md-card>
+        <md-card-media>
+          <img :src="avatar" alt="People">
+        </md-card-media>
+      </md-card-header>
+    </md-card>
+  </div>
 </template>
 
 <script>
@@ -25,3 +27,9 @@
     ]
   }
 </script>
+
+<style lang="scss" scoped>
+.push-card-container {
+  margin: 15px;
+}
+</style>

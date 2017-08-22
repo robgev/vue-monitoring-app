@@ -2,12 +2,14 @@
   <page detailed>
     <md-whiteframe md-elevation="3" class="changes-container">
       <div class="header">
-        <span class="md-display-3 project-name">{{this.$route.params.projectid}}</span>
-        <md-button class="md-fab md-clean" title="Sync with master">
-          <md-icon>sync</md-icon>
-        </md-button>
+        <div class="control-bar">
+          <span class="md-display-2 project-name">{{this.$route.params.projectid}}</span>
+          <md-button class="md-fab md-clean" title="Sync with master">
+            <md-icon>sync</md-icon>
+          </md-button>
+        </div>
+        <hr />
       </div>
-      <hr />
       <div class="scrollbar">
         <push-card
           v-for="change in changes"
@@ -61,13 +63,22 @@
 
 <style lang="scss" scoped>
 .changes-container {
-  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   border-radius: 9px;
   padding: 15px;
   .header {
     display: flex;
-    height: 75px;
-    justify-content: space-between;
+    flex-direction: column;
+    height: 5%;
+    min-height: 75px;
+    .control-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    };
     .project-name {
       text-transform: capitalize;
       font-weight: 900;
@@ -75,7 +86,9 @@
     }
   }
   .scrollbar {
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 95%;
     overflow-y: auto;
   }
 }

@@ -4,7 +4,7 @@
       <div class="left" @click="back">
         <md-icon class="icon">arrow_back</md-icon>
       </div>
-      <md-tabs @change="onTabChange" ref="tabs">
+      <md-tabs @change="onTabChange" style="width: calc(100vw - 4rem)" ref="tabs">
         <md-tab
           v-for="tab in items"
           :key="tab.id"
@@ -64,6 +64,9 @@
       text-transform: uppercase;
       font-weight: bold;
       font-size: large;
+    }
+    &.topbar {
+      height: 2vh;
     }
   }
   .detailed {

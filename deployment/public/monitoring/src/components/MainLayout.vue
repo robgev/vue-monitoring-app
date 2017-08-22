@@ -27,5 +27,6 @@ export default {
 <style scoped>
 .content {
   padding: 2rem 4rem 4rem 4rem;
+  height: calc(100vh - 64px);
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class='push-card-container'>
-    <md-card>
+    <md-card md-with-hover>
       <md-card-header>
         <md-card-media class="avatar">
           <img :src="avatar" alt="People">
@@ -10,6 +10,7 @@
           <div class="md-subhead">On {{new Date(date).toLocaleString()}}</div>
         </md-card-header-text>
       </md-card-header>
+      <md-ink-ripple></md-ink-ripple>
     </md-card>
     <md-card v-for="commit in commits" :key="commit.hash" class="commit-card">
       <md-card-header>

@@ -24,7 +24,7 @@ module.exports = function(server) {
 			            },
 						author: {
 							name: 'Malincyan Pavel',
-							avatar: 'https://bitbucket.org/account/pavelMalincyan/avatar/32/'
+							avatar: 'https://bitbucket.org/account/artashes_bayazetyan/avatar/32/'
 						}
 					},
 					{
@@ -44,7 +44,7 @@ module.exports = function(server) {
 			            },
 						author: {
 							name: 'Malincyan Pavel',
-							avatar: 'https://bitbucket.org/account/pavelMalincyan/avatar/32/'
+							avatar: 'https://bitbucket.org/account/artashes_bayazetyan/avatar/32/'
 						}
 					},
 					{
@@ -64,7 +64,7 @@ module.exports = function(server) {
 			            },
 						author: {
 							name: 'Malincyan Pavel',
-							avatar: 'https://bitbucket.org/account/pavelMalincyan/avatar/32/'
+							avatar: 'https://bitbucket.org/account/artashes_bayazetyan/avatar/32/'
 						}
 					},
 					{
@@ -84,7 +84,7 @@ module.exports = function(server) {
 			            },
 						author: {
 							name: 'Malincyan Pavel',
-							avatar: 'https://bitbucket.org/account/pavelMalincyan/avatar/32/'
+							avatar: 'https://bitbucket.org/account/artashes_bayazetyan/avatar/32/'
 						}
 					},
 					{
@@ -104,7 +104,7 @@ module.exports = function(server) {
 			            },
 						author: {
 							name: 'Malincyan Pavel',
-							avatar: 'https://bitbucket.org/account/pavelMalincyan/avatar/32/'
+							avatar: 'https://bitbucket.org/account/artashes_bayazetyan/avatar/32/'
 						}
 					}
 				],
@@ -114,7 +114,7 @@ module.exports = function(server) {
 					branch: 'master',
 					author: {
 						name: 'Malincyan Pavel',
-						avatar: 'https://bitbucket.org/account/pavelMalincyan/avatar/32/'
+						avatar: 'https://bitbucket.org/account/artashes_bayazetyan/avatar/32/'
 					},
 					company: 'Hanseaticsoft',
 					message: 'Merged in bug-fix (pull request #59)\n\nBug fix\n',

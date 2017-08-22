@@ -11,6 +11,10 @@ html {
   box-sizing: inherit;
 }
 
+hr {
+  margin: 10px
+}
+
 .topbar .md-tabs-content {
   display: none;
 }

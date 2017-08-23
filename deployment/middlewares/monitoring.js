@@ -1,13 +1,13 @@
 const converter = require('../libs/converter-bitbucket-payload.js');
 
-module.exports = ({ body: payload, app, uuid }, res, next) => {
+module.exports = (req, res, next) => {
+
+	const { body: payload, app, uuid } = req;
 
 	try {
 		const convertedData = converter.set(payload).getInfo(['push', 'commits']);
 
 		convertedData.uuid = convertedData.push.hash;
-
-		console.log('Log ::: Converted Data ::: ', convertedData);
 
 		// send only when change in master branch
 
@@ -17,6 +17,11 @@ module.exports = ({ body: payload, app, uuid }, res, next) => {
 			// broadcast
 			io.sockets.emit('push', convertedData);
 		}
+
+		const { repo, branch } = convertedData.push;
+
+		res.locals.repo = repo;
+		res.locals.branch = branch;
 
 	} catch(err) { console.log('Log ::: Error ::: ', err) }
 

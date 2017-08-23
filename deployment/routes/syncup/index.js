@@ -2,26 +2,33 @@ const path = require('path');
 
 const { execFile } = require('child_process');
 
-module.exports.post = ({ body: payload }, res) => {
-	spinner.start();
+module.exports.post = ({ body: payload, params: { project: projectName } }, res) => {
 
-	const { projectName, hash } = payload;
-
-	if (!projectName) {
-		throw new Error('Payload should contain project name and commit hash.');
-	}
+	const { hash } = payload;
 
 	const spinner = require('ora')(`Sync up "${projectName}" project ...`);
 
-	execFile(path.join(__dirname, 'syncup.sh'), [projectName, hash || ''], (err, stdout) => {
+	spinner.start();
+
+	const result = {msg: ''};
+
+	let flags = [projectName];
+
+	if (hash) {
+		flags.push(hash);
+	}
+
+	execFile(path.join(__dirname, 'syncup.sh'), flags, (err, stdout) => {
 		if (err) {
 			console.error(err);
 			spinner.fail(`Couldn\'t sync up project "${projectName}"`);
+			result.msg = 'success';
 		} else {
 			console.log(stdout);
 			spinner.succeed(`Project "${projectName}" is now up to date!`);
+			result.msg = 'error';
 		}
 	});
 
-	res.end();
+	res.send(result);
 }

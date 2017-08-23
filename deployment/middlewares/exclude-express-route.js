@@ -2,7 +2,7 @@ const exclude = (exclude, middleware) => {
 
     return (req, res, next) => {
 
-        if (req.path === exclude) {
+        if (req.path.includes(exclude)) {
 
             return next();
         }
@@ -10,6 +10,5 @@ const exclude = (exclude, middleware) => {
         return middleware(req, res, next);
     }
 }
-
 
 module.exports = exclude;

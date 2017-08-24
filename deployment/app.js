@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use('/api/projects', exclude('/syncup', require('./middlewares/monitoring')));
+app.use('/api/:company/projects', exclude('/syncup', require('./middlewares/monitoring')));
 
 require('./routes')(app);
 

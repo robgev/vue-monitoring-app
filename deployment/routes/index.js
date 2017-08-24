@@ -18,6 +18,8 @@ module.exports = function(app) {
 
   app.post('/api/:company/projects/:project/syncup', require('./syncup/').post);
 
+  app.put('/api/:company/projects/:project/proxy-target', require('./projects/update/proxyTarget').update);
+
   app.get('/api/:company/projects/:project', require('./projects/get/').get);
 
   app.get('/api/:company/projects', require('./projects/get/').getAll);

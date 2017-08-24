@@ -36,6 +36,9 @@ const fetchProxyTargets = _ => {
 fetchProxyTargets();
 
 socket.on('data', data => {
+
+    console.log('Log ::: Should update');
+
     const converted = JSON.parse(data.toString('utf8'));
     const { msg } = converted;
 

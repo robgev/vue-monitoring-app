@@ -20,6 +20,8 @@ module.exports = function(app) {
 
   app.get('/api/:company/projects/:project', require('./projects/get/').get);
 
-  app.get('/api/:company/projects', require('./projects/get/').getAll);   
+  app.get('/api/:company/projects', require('./projects/get/').getAll);
+
+  app.get('/api/:company/proxy-targets', require('./projects/get/').proxyTargets);
 
 }

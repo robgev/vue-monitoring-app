@@ -25,3 +25,15 @@ module.exports.getAll = (req, res) => {
 
 	res.json(projects);
 }
+
+module.exports.proxyTargets = (req, res) => {
+	const projects = getProjects(req.params);
+
+	const targets = Object.keys(projects).reduce((targets, project) => {
+		const current = projects[project];
+
+		return Object.assign({}, targets, { [current.port]: current['proxy-target'] });
+	}, {});
+
+	res.json(targets);
+}

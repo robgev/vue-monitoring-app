@@ -1,15 +1,18 @@
-const http            = require('http');
-const path            = require('path');
-const figlet          = require('figlet');
-const bodyParser      = require('body-parser');
-const config          = require('./config');
-const cookieParser    = require('cookie-parser');
-const favicon         = require('serve-favicon');
-const express         = require('express');
+const http = require('http');
+const path = require('path');
+const figlet = require('figlet');
+const bodyParser = require('body-parser');
+const config = require('./config');
+const cookieParser = require('cookie-parser');
+const favicon = require('serve-favicon');
+const express = require('express');
 
-const app             = express();
+const app = express();
 
-const exclude 		  = require('./middlewares/exclude-express-route');
+const exclude = require('./middlewares/exclude-express-route');
+
+const ipc = require('./net');
+const db = require('./lowDb'); 
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.urlencoded({extended: true}));

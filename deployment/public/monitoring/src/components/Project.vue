@@ -4,9 +4,12 @@
       <div class="header">
         <div class="control-bar">
           <span class="md-display-2 project-name">{{this.$route.params.projectid}}</span>
-          <md-button class="md-fab md-clean" title="Sync with master">
-            <md-icon>sync</md-icon>
-          </md-button>
+          <sync-button
+            :topButton="true"
+            :onSuccess="changeHead"
+            title="Sync with master"
+            :latestSuccess="latestSuccess"
+          />
         </div>
         <hr />
       </div>
@@ -14,12 +17,14 @@
         <push-card
           v-for="change in changes"
           :key="change.uuid"
-          :name="change.push.author.name"
+          :onSuccess="changeHead"
           :repo="change.push.repo"
-          :message="change.push.message"
           :date="change.push.date"
-          :avatar="change.push.author.avatar"
           :commits="change.commits"
+          :latestSuccess="latestSuccess"
+          :message="change.push.message"
+          :name="change.push.author.name"
+          :avatar="change.push.author.avatar"
         />
       </div>
     </md-whiteframe>
@@ -29,16 +34,19 @@
 <script>
   import MainLayout from './MainLayout';
   import PushCard from './PushCard.vue';
+  import SyncButton from './SyncButton';
 
   export default {
     name: 'hello',
     components: {
       'page': MainLayout,
-      'push-card': PushCard
+      'push-card': PushCard,
+      'sync-button': SyncButton,
     },
     data() {
       return {
-        changes: []
+        changes: [],
+        latestSuccess: null
       }
     },
     created () {
@@ -56,6 +64,9 @@
         const projectData = companyData.projects[projectName];
         const { changes } = projectData || [];
         this.changes = changes
+      },
+      changeHead(latestHead) {
+        this.latestSuccess = latestHead;
       }
     }
   }

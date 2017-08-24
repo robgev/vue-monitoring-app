@@ -8,22 +8,32 @@
         <div class="md-title">Commit {{message}} by {{name}}</div>
         <div class="md-subhead">Commited on {{new Date(date).toLocaleString()}} Hash: {{hash}}</div>
       </md-card-header-text>
-      <md-button class="md-fab md-clean" title="Checkout to this commit">
-        <md-icon>sync</md-icon>
-      </md-button>
+      <sync-button
+        :hash="hash"
+        :onSuccess="onSuccess"
+        :latestSuccess="latestSuccess"
+        title="Checkout to this commit"
+      />
     </md-card-header>
   </md-card>
 </template>
 
 <script>
+  import SyncButton from './SyncButton';
+
   export default {
+    components: {
+      'sync-button': SyncButton
+    },
     props: [
       'open',
       'name',
-      'message',
       'date',
-      'avatar',
       'hash',
+      'avatar',
+      'message',
+      'onSuccess',
+      'latestSuccess',
     ]
   }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class='push-card-container'>
-    <div @click="test">
+    <div @click="toggle">
       <md-card md-with-hover>
         <md-card-header>
           <md-card-media class="avatar">
@@ -15,13 +15,16 @@
       </md-card>
     </div>
     <commit-card
-      v-for="commit in commits" :key="commit.hash"
+      v-for="commit in commits"
+      :key="commit.hash"
       :open="open"
       :name="commit.author.name"
       :message="commit.message"
       :date="commit.date"
       :avatar="commit.author.avatar"
       :hash="commit.hash"
+      :latestSuccess="latestSuccess"
+      :onSuccess="onSuccess"
     />
   </div>
 </template>
@@ -34,7 +37,7 @@
       'commit-card': CommitCard,
     },
     methods: {
-      test() {
+      toggle() {
         this.open = !this.open;
       }
     },
@@ -46,17 +49,18 @@
     props: [
       'name',
       'repo',
-      'message',
       'date',
       'avatar',
+      'message',
       'commits',
+      'onSuccess',
+      'latestSuccess',
     ]
   }
 </script>
 
 <style lang="scss" scoped>
 .push-card-container {
-  height: 100%;
   margin: 15px;
   .avatar {
     margin-right: 20px;

@@ -5,4 +5,5 @@ deployment/node_modules
 deployment/package-lock.json
 deployment/npm-debug.log
 deployment/.DS_Store
+deployment/db.json
 package-lock.json

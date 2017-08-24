@@ -13,7 +13,7 @@ const debug = process.env.NODE_ENV !== 'production';
 const state = {
     app: 'monitoring',
     companies: {
-        'Hanseaticsoft': {
+        'hanseaticsoft': {
           projects: {
             'cfm-cloud-mc': { changes: [], code: 'cfm-cloud-mc', id: 'miscellaneous', tabLabel: 'miscellaneous' },
             'cfm-cloud-mt': { changes: [], code: 'cfm-cloud-mt', id: 'maintenance', tabLabel: 'maintenance' },

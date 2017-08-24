@@ -7,7 +7,7 @@
         </md-card-media>
         <md-card-area>
           <md-card-header>
-            <div class="md-title">{{ companyName }}</div>
+            <div class="md-title company-name">{{ companyName }}</div>
           </md-card-header>
         </md-card-area>
         <md-ink-ripple></md-ink-ripple>
@@ -35,6 +35,9 @@ export default {
   width: 400px;
   height: 300px;
   text-align: center;
+  .company-name {
+    text-transform: capitalize;
+  }
 }
 
 </style>

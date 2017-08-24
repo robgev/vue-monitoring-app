@@ -3,23 +3,46 @@ const express = require('express');
 const proxy = require('proxy-middleware');
 const signalRProxy = require('express-http-proxy');
 const cors = require('cors');
-const emoji = require('node-emoji')
+const emoji = require('node-emoji');
+const socket = require('./net');
+const request = require('request');
 
 // All API calls need an additional "/api" tag in the URL
 
-const projectsTargets = {
+let projectsTargets = {
     '8087': 'https://staging5.cloudfleetmanager.com', // maintenance
     '8880': 'https://staging4.cloudfleetmanager.com', // blog
     '8884': 'https://staging4.cloudfleetmanager.com', // crewing
     '8882': 'https://staging5.cloudfleetmanager.com', // miscellaneous
     '8280': 'https://staging5.cloudfleetmanager.com', // disturbance
-    '8089': 'https://staging4.cloudfleetmanager.com', // inspections
+    '8089': 'https://staging5.cloudfleetmanager.com', // inspections
     '8881': 'https://staging4.cloudfleetmanager.com', // certificates
     '8121': 'https://staging5.cloudfleetmanager.com', // circulars
     '8380': 'https://staging4.cloudfleetmanager.com', // towage
     '8228': 'https://staging4.cloudfleetmanager.com', // employees
     'default': 'https://staging5.cloudfleetmanager.com' // default
 }
+
+const fetchProxyTargets = _ => {
+    request('http://127.0.0.1:3000/api/hanseaticsoft/proxy-targets', (err, res, body) => {
+        if (err) {
+            console.log('Log ::: Local network error ::: ', err);
+        }
+
+        projectsTargets = JSON.parse(body);
+    });
+}
+
+fetchProxyTargets();
+
+socket.on('data', data => {
+    const converted = JSON.parse(data.toString('utf8'));
+    const { msg } = converted;
+
+    if (msg === 'update-proxy-targets') {
+        fetchProxyTargets();
+    }
+});
 
 const getPort = origin => origin.substr(origin.lastIndexOf(':') + 1, 4);
 
@@ -63,7 +86,7 @@ const Proxy = _ => {
 
         const port = getPort(origin || referer);
 
-        const targetUrl = getTarget(port);
+        const targetUrl = getTarget(port.toString());
 
         const proxyOptions = url.parse(targetUrl);
 

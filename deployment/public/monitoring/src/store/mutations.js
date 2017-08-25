@@ -7,7 +7,6 @@ const mutations = {
     const currentCompany = state.companies[companyName];
     const currentProject = currentCompany.projects[projectName];
     const { changes } = currentProject;
-    console.log(changes)
     const isNew = !(changes.find(change => change.uuid === pushData.uuid)) // Search the element
     if (isNew) {
       currentProject.changes.push(pushData)

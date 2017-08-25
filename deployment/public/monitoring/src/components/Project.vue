@@ -53,7 +53,7 @@
       if( !Object.keys(projects).length ) {
         await this.$store.dispatch('load_company_projects', { companyid })
       };
-      this.updateChanges()
+      this.initializeProjects()
     },
     data() {
       return {
@@ -67,6 +67,12 @@
       '$route': 'updateChanges'
     },
     methods: {
+      initializeProjects() {
+        const companyName = this.$route.params.companyid;
+        const companyData = this.$store.state.companies[companyName];
+        const { projects } = companyData;
+        this.projects = projects;
+      },
       updateChanges() {
         const companyName = this.$route.params.companyid;
         const projectName = this.$route.query.code;
@@ -74,7 +80,6 @@
         const { projects } = companyData;
         const projectData = projects[projectName];
         const { changes } = projectData || [];
-        this.projects = projects;
         this.changes = changes;
       },
       changeHead(latestHead) {

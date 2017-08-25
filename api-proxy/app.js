@@ -37,7 +37,7 @@ fetchProxyTargets();
 
 socket.on('data', data => {
 
-    console.log('Log ::: Should update');
+    console.log('Log ::: Should update  :::');
 
     const converted = JSON.parse(data.toString('utf8'));
     const { msg } = converted;
@@ -51,81 +51,73 @@ const getPort = origin => origin.substr(origin.lastIndexOf(':') + 1, 4);
 
 const getTarget = (port = 'default') => projectsTargets[port];
 
-const Proxy = _ => {
-    const app = express();
+const app = express();
 
-    app.use(cors({
-        credentials: true,
-        origin: true
-    }));
+app.use(cors({
+    credentials: true,
+    origin: true
+}));
 
-    app.use((req, res, next) => {
-        res.header('Access-Control-Allow-Origin', req.get('origin'));
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-        next();
-    });
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', req.get('origin'));
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    next();
+});
 
-    app.use('/signalr', signalRProxy(getTarget(), {
-        proxyReqPathResolver(req) {
-            const { originalUrl, url: currentUrl } = req;
+app.use('/signalr', signalRProxy(getTarget(), {
+    proxyReqPathResolver(req) {
+        const { originalUrl, url: currentUrl } = req;
 
-            const parsedUrl = url.parse(currentUrl);
+        const parsedUrl = url.parse(currentUrl);
 
-            if (originalUrl.indexOf('connect') !== -1) {
-                return '/signalr' + parsedUrl.path;
-            }
-
-            if (originalUrl.indexOf('/signalr/send') !== -1) {
-                return parsedUrl.path.replace('/signalr', '');
-            }
-
-            return parsedUrl.path;
+        if (originalUrl.indexOf('connect') !== -1) {
+            return '/signalr' + parsedUrl.path;
         }
-    }));
 
-    app.use('/api', (req, res, next) => {
-        
-        const { origin, referer } = req.headers;
-
-        const port = getPort(origin || referer);
-
-        const targetUrl = getTarget(port.toString());
-
-        const proxyOptions = url.parse(targetUrl);
-
-        proxyOptions.rejectUnauthorized = false;
-
-        proxyOptions.cookieRewrite = true;
-
-        console.log(
-            '*********************',
-            emoji.get('coffee'),
-            emoji.get('smoking'),
-            emoji.get('white_check_mark'),
-            'SUCCESS ...',
-            '*********************'
-        );
-        console.log('* Log ::: Port ::: ', port);
-        console.log('* Log ::: Target ::: ', targetUrl);
-        console.log('****************************************************************');
-
-        proxy(proxyOptions)(req, res, next);
-    });
-
-    return app;
-};
-
-// x
-if (!module.parent) {
-    const appProxy = Proxy({ origin: 1337 });
-    const port = 8081;
-    appProxy.listen(port, '0.0.0.0', (err) => {
-        if (err) {
-            console.log(err);
-            return;
+        if (originalUrl.indexOf('/signalr/send') !== -1) {
+            return parsedUrl.path.replace('/signalr', '');
         }
-        console.log('Proxy is listening on port ' + port);
-    });
-}
 
-module.exports = Proxy;
+        return parsedUrl.path;
+
+    }
+}));
+
+app.use('/api', (req, res, next) => {
+    
+    const { origin, referer } = req.headers;
+
+    const port = getPort(origin || referer);
+
+    const targetUrl = getTarget(port.toString());
+
+    const proxyOptions = url.parse(targetUrl);
+
+    proxyOptions.rejectUnauthorized = false;
+
+    proxyOptions.cookieRewrite = true;
+
+    console.log(
+        '*********************',
+        emoji.get('coffee'),
+        emoji.get('smoking'),
+        emoji.get('white_check_mark'),
+        'SUCCESS ...',
+        '*********************'
+    );
+    console.log('* Log ::: Port ::: ', port);
+    console.log('* Log ::: Target ::: ', targetUrl);
+    console.log('****************************************************************');
+
+    proxy(proxyOptions)(req, res, next);
+});
+
+const port = 8081;
+app.listen(port, '0.0.0.0', (err) => {
+    if (err) {
+        console.log(err);
+        return;
+    }
+    console.log('Proxy is listening on port ' + port);
+});

@@ -5,12 +5,22 @@
       <div class="header">
         <div class="control-bar">
           <span class="md-display-2 project-name">{{this.$route.params.projectid}}</span>
-          <sync-button
-            :topButton="true"
-            :onSuccess="changeHead"
-            title="Sync with master"
-            :latestSuccess="latestSuccess"
-          />
+          <div class="controls">
+            <md-input-container class="select-field">
+              <label for="target">Target</label>
+              <md-select md-menu-class="select-field-menu" name="target" id="target" v-model="target">
+                <md-option value="https://staging4.cloudfleetmanager.com">Staging4</md-option>
+                <md-option value="https://staging5.cloudfleetmanager.com">Staging5</md-option>
+                <md-option value="local" title="Comming soon" :disabled="true">Local</md-option>
+              </md-select>
+            </md-input-container>
+            <sync-button
+              :topButton="true"
+              :onSuccess="changeHead"
+              title="Sync with master"
+              :latestSuccess="latestSuccess"
+            />
+          </div>
         </div>
         <hr />
       </div>
@@ -57,8 +67,9 @@
     },
     data() {
       return {
-        changes: [],
+        target: '',
         projects: {},
+        changes: {},
         latestSuccess: null
       }
     },
@@ -71,6 +82,11 @@
         const companyName = this.$route.params.companyid;
         const companyData = this.$store.state.companies[companyName];
         const { projects } = companyData;
+        const defaultProjectName = Object.keys(projects)[0];
+        const defaultProject = projects[defaultProjectName];
+        const { changes, 'proxy-target': proxyTarget } = defaultProject;
+        this.target = proxyTarget;
+        this.changes = changes;
         this.projects = projects;
       },
       updateChanges() {
@@ -78,9 +94,9 @@
         const projectName = this.$route.query.code;
         const companyData = this.$store.state.companies[companyName];
         const { projects } = companyData;
-        const projectData = projects[projectName];
-        const { changes } = projectData || [];
+        const { changes, 'proxy-target': proxyTarget } = projects[projectName];
         this.changes = changes;
+        this.target = proxyTarget;
       },
       changeHead(latestHead) {
         this.latestSuccess = latestHead;
@@ -106,6 +122,15 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
+      .controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .select-field {
+          width: 400px;
+          margin-right: 20px;
+        }
+      }
     };
     .project-name {
       text-transform: capitalize;

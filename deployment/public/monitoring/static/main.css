@@ -22,3 +22,9 @@ hr {
 .topbar .md-tabs-content {
   display: none;
 }
+
+.select-field-menu {
+  width: 100% !important;
+  margin-top: 35px !important;
+  margin-left: 0px !important;
+}

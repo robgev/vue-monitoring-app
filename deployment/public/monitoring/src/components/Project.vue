@@ -1,5 +1,6 @@
 <template>
-  <page detailed>
+  <page>
+    <topbar slot="header" :detailed="true" :items="projects" />
     <md-whiteframe md-elevation="3" class="changes-container">
       <div class="header">
         <div class="control-bar">
@@ -32,6 +33,7 @@
 </template>
 
 <script>
+  import TopBar from './TopBar'
   import MainLayout from './MainLayout';
   import PushCard from './PushCard.vue';
   import SyncButton from './SyncButton';
@@ -39,18 +41,26 @@
   export default {
     name: 'hello',
     components: {
+      'topbar': TopBar,
       'page': MainLayout,
       'push-card': PushCard,
       'sync-button': SyncButton,
     },
+    async beforeMount() {
+      const { companyid } = this.$route.params;
+      const companyData = this.$store.state.companies[companyid];
+      const { projects } = companyData
+      if( !Object.keys(projects).length ) {
+        await this.$store.dispatch('load_company_projects', { companyid })
+      };
+      this.updateChanges()
+    },
     data() {
       return {
         changes: [],
+        projects: {},
         latestSuccess: null
       }
-    },
-    created () {
-      this.updateChanges();
     },
     watch: {
       // call again the method if the route changes
@@ -61,9 +71,11 @@
         const companyName = this.$route.params.companyid;
         const projectName = this.$route.query.code;
         const companyData = this.$store.state.companies[companyName];
-        const projectData = companyData.projects[projectName];
+        const { projects } = companyData;
+        const projectData = projects[projectName];
         const { changes } = projectData || [];
-        this.changes = changes
+        this.projects = projects;
+        this.changes = changes;
       },
       changeHead(latestHead) {
         this.latestSuccess = latestHead;

@@ -32,7 +32,7 @@ export default {
       this.status = null;
       this.isLoading = true;
       const { companyid, projectid } = this.$route.params;
-      const projectName = this.$route.query.code
+      // const projectName = this.$route.query.code
       const body = hash ? { hash } : {};
       const request_options = {
         method:'post',

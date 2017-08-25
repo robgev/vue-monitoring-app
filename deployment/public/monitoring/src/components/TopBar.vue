@@ -30,20 +30,16 @@
         const currentTab = allTabs[idx + 1]; // First child is ink ripple which we try to avoid
         const { id: currentID, mdOptions: { code } } = currentTab
         this.$router.replace({name: 'projectPage', params: { projectid: currentID }, query: { code }})
-      }
-    },
-    data() {
-      const companyName = this.$route.params.companyid;
-      const companyData = this.$store.state.companies && companyName ? this.$store.state.companies[companyName] : [];
-      const { projects } = companyData;
-      return {
-        items: projects,
-      }
+      },
     },
     props: {
       detailed: {
         type: Boolean,
         default: false
+      },
+      items: {
+        type: Object,
+        default: () => {},
       }
     }
   }

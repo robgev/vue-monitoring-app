@@ -1,5 +1,6 @@
 <template>
   <page>
+    <topbar slot="header" />
     <div>
       <h1 class="title">Projects</h1>
       <hr />
@@ -15,8 +16,9 @@
 <script>
   import { mapGetters } from 'vuex';
 
-  import CompanyCard from './CompanyCard';
+  import TopBar from './TopBar'
   import MainLayout from './MainLayout';
+  import CompanyCard from './CompanyCard';
 
   export default {
     name: 'dashboard',
@@ -26,8 +28,9 @@
     ]),
 
     components: {
-      'company-card': CompanyCard,
+      'topbar': TopBar,
       'page': MainLayout,
+      'company-card': CompanyCard,
     }
   }
 </script>

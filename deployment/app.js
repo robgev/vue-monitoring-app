@@ -3,6 +3,7 @@ const path = require('path');
 const figlet = require('figlet');
 const bodyParser = require('body-parser');
 const config = require('./config');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const favicon = require('serve-favicon');
 const express = require('express');
@@ -23,11 +24,10 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.static(__dirname + '/public'));
 
-app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', req.get('origin'));
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-	next();
-});
+app.use(cors({
+    credentials: true,
+    origin: true
+}));
 
 app.use('/api/:company/projects', exclude('/syncup', require('./middlewares/monitoring')));
 

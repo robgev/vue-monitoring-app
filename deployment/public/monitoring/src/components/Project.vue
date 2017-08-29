@@ -96,7 +96,8 @@
         const projectName = this.$route.query.code;
         const companyData = this.$store.state.companies[companyName];
         const { projects } = companyData;
-        const { changes, 'proxy-target': proxyTarget } = projects[projectName];
+        const { changes, 'proxy-target': proxyTarget, 'local-target': localTarget } = projects[projectName];
+        this.localTarget = localTarget;
         this.changes = changes;
         this.target = proxyTarget;
       },

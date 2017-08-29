@@ -1,9 +1,17 @@
 const net = require('net');
 
-const socket = new net.Socket();
+let client = new net.Socket();
 
-socket.connect(1337, 'localhost', _ => {
-	console.log('Log ::: Connected with server');
-});
+const PORT = 1337;
 
-module.exports = socket;
+const HOST = '127.0.0.1';
+
+const getMessageForConnection = _ => console.log('Log ::: Connected to server');
+
+const setConnection = _ => client.connect(PORT, HOST, getMessageForConnection);
+
+setConnection();
+
+client.on('close', _ => client.setTimeout(500, setConnection));
+
+module.exports = client;

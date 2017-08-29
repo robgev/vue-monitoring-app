@@ -11,7 +11,7 @@
               <md-select @selected="changeProxy" md-menu-class="select-field-menu" name="target" id="target" v-model="target">
                 <md-option value="https://staging4.cloudfleetmanager.com">Staging4</md-option>
                 <md-option value="https://staging5.cloudfleetmanager.com">Staging5</md-option>
-                <md-option value="local" title="Comming soon" :disabled="true">Local</md-option>
+                <md-option :value="localTarget">Local</md-option>
               </md-select>
             </md-input-container>
             <sync-button
@@ -68,8 +68,9 @@
     data() {
       return {
         target: '',
-        projects: {},
         changes: {},
+        projects: {},
+        localTarget: '',
         latestSuccess: null
       }
     },
@@ -84,8 +85,9 @@
         const { projects } = companyData;
         const defaultProjectName = Object.keys(projects)[0];
         const defaultProject = projects[defaultProjectName];
-        const { changes, 'proxy-target': proxyTarget } = defaultProject;
+        const { changes, 'proxy-target': proxyTarget, 'local-target': localTarget } = defaultProject;
         this.target = proxyTarget;
+        this.localTarget = localTarget;
         this.changes = changes;
         this.projects = projects;
       },

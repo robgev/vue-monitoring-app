@@ -22,13 +22,13 @@ module.exports.post = ({ body: payload, params: { project: projectName } }, res)
 		if (err) {
 			console.error(err);
 			spinner.fail(`Couldn\'t sync up project "${projectName}"`);
-			result.msg = 'success';
+			result.msg = 'error';
 		} else {
 			console.log(stdout);
 			spinner.succeed(`Project "${projectName}" is now up to date!`);
-			result.msg = 'error';
+			result.msg = 'success';
 		}
-	});
 
-	res.send(result);
+		res.json(result);
+	});
 }

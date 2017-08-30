@@ -15,6 +15,26 @@ hr {
   margin: 10px
 }
 
+.md-card .md-card-header:last-child {
+    margin-bottom: 0px !important;
+}
+
 .topbar .md-tabs-content {
   display: none;
+}
+
+.md-tooltip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px !important;
+  height: 40px !important;
+  border-radius: 15px;
+  font-size: 12px !important;
+}
+
+.select-field-menu {
+  width: 100% !important;
+  margin-top: 35px !important;
+  margin-left: 0px !important;
 }

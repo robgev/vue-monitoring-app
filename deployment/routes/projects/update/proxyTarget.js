@@ -12,6 +12,8 @@ module.exports.update = ({ body, params }, res) => {
 
 	const { project, company } = params;
 
+	console.log('Log ::: test ::: ', project, company, body.target);
+
 	db
 		.get('companies')
 		.get(company)

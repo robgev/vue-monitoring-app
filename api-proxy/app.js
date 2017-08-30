@@ -58,13 +58,6 @@ app.use(cors({
     origin: true
 }));
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', req.get('origin'));
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    next();
-});
-
 app.use('/signalr', signalRProxy(getTarget(), {
     proxyReqPathResolver(req) {
         const { originalUrl, url: currentUrl } = req;
@@ -109,8 +102,9 @@ app.use('/api', (req, res, next) => {
     console.log('* Log ::: Port ::: ', port);
     console.log('* Log ::: Target ::: ', targetUrl);
     console.log('****************************************************************');
-
+    // console.time('start');
     proxy(proxyOptions)(req, res, next);
+    // console.timeEnd('start');
 });
 
 const port = 8081;

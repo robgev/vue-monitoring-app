@@ -13,11 +13,12 @@
                 <md-option value="https://staging5.cloudfleetmanager.com">Staging5</md-option>
                 <md-option :value="localTarget">Local</md-option>
               </md-select>
+              <md-tooltip md-direction="top">Change proxy target</md-tooltip>
             </md-input-container>
             <sync-button
               :topButton="true"
               :onSuccess="changeHead"
-              title="Sync with master"
+              tooltip="Sync with master"
               :latestSuccess="latestSuccess"
             />
           </div>

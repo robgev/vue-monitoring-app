@@ -2,11 +2,11 @@
   <div>
   <md-button
     @click="() => checkout(hash)"
-    :title="title"
     :disabled="isLoading || (status === 'success' && hash === latestSuccess)"
     :class="`md-icon-button md-fab md-raised ${computedStatus || 'md-clean'}`"
   >
     <md-icon :class="`${isLoading ? 'animate' : ''}`">sync</md-icon>
+    <md-tooltip md-direction="top">{{ tooltip }}</md-tooltip>
   </md-button>
 </div>
 </template>
@@ -21,7 +21,7 @@ export default {
   },
   props: [
     'hash',
-    'title',
+    'tooltip',
     'topButton',
     'onSuccess',
     'latestSuccess',

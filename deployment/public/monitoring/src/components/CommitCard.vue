@@ -12,7 +12,7 @@
         :hash="hash"
         :onSuccess="onSuccess"
         :latestSuccess="latestSuccess"
-        title="Checkout to this commit"
+        tooltip="Checkout to this commit"
       />
     </md-card-header>
   </md-card>

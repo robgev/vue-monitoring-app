@@ -105,19 +105,21 @@
         this.latestSuccess = latestHead;
       },
       async changeProxy(target) {
-        const { companyid, projectid } = this.$route.params;
-        const { code } = this.$route.query;
-        const request_options = {
-          method:'put',
-          headers: new Headers({
-            'Content-Type':'application/json'
-          }),
-          body: JSON.stringify({ target })
-        };
-        const promise = await fetch(`http://10.10.1.10:3000/api/${companyid}/projects/${code}/proxy-target`, request_options)
-        const result = await promise.json()
-        if(result) {
-          console.log(result)
+        if (target) {
+          const { companyid, projectid } = this.$route.params;
+          const { code } = this.$route.query;
+          const request_options = {
+            method:'put',
+            headers: new Headers({
+              'Content-Type':'application/json'
+            }),
+            body: JSON.stringify({ target })
+          };
+          const promise = await fetch(`http://10.10.1.10:3000/api/${companyid}/projects/${code}/proxy-target`, request_options)
+          const result = await promise.json()
+          if(result) {
+            console.log(result)
+          }
         }
       }
     }

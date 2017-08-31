@@ -26,4 +26,6 @@ module.exports = function(app) {
 
   app.get('/api/:company/proxy-targets', require('./projects/get/').proxyTargets);
 
+  app.get('/api/:company/states', require('./projects/get/').projectsState);
+
 }

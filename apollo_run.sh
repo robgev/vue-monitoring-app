@@ -86,3 +86,13 @@ function apollo-update {
     fi
   fi
 }
+
+# Function - apollo-projects-state ::: get all projects states ( commit hash for each prpject )
+
+function apollo-projects-state {
+  for i in "${APOLLO_PROJECTS[@]}"
+  do
+    apollo-cd-project $i
+    git rev-parse --verify HEAD
+  done
+}

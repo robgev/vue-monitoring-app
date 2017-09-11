@@ -7,7 +7,10 @@ const loadProjects = async (companyid) => {
       'Content-Type':'application/json'
     })
   };
-  const promise = await fetch(`http://10.10.1.10:3000/api/${companyid}/projects`, request_options);
+
+  const serverIp = process.env.NODE_ENV !== 'production' ? '10.10.1.10:3000' : '37.252.65.134:85';
+
+  const promise = await fetch(`http://${serverIp}/api/${companyid}/projects`, request_options);
   const projects = await promise.json();
   if(projects) {
     return { companyid, projects }

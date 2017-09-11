@@ -107,6 +107,7 @@
       },
       async changeProxy(target) {
         if (target) {
+          const serverIp = process.env.NODE_ENV !== 'production' ? '10.10.1.10:3000' : '37.252.65.134:85';
           const { companyid, projectid } = this.$route.params;
           const { code } = this.$route.query;
           const request_options = {
@@ -116,7 +117,7 @@
             }),
             body: JSON.stringify({ target })
           };
-          const promise = await fetch(`http://10.10.1.10:3000/api/${companyid}/projects/${code}/proxy-target`, request_options)
+          const promise = await fetch(`http://${serverIp}/api/${companyid}/projects/${code}/proxy-target`, request_options)
           const result = await promise.json()
           if(result && result.msg === "success") {
             this.$store.dispatch('change_project_proxy', { companyid, projectCode: code, target })

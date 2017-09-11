@@ -8,12 +8,16 @@
           <div class="controls">
             <md-input-container class="select-field">
               <label for="target">Target</label>
-              <md-select @selected="changeProxy" md-menu-class="select-field-menu" name="target" id="target" v-model="target">
+              <md-select @opened="openSnackbar" @selected="changeProxy" md-menu-class="select-field-menu" name="target" id="target" v-model="target">
                 <md-option value="https://staging4.cloudfleetmanager.com">Staging4</md-option>
                 <md-option value="https://staging5.cloudfleetmanager.com">Staging5</md-option>
                 <md-option :value="localTarget">Local</md-option>
               </md-select>
               <md-tooltip md-direction="top">Change proxy target</md-tooltip>
+              <md-snackbar md-position="top right" ref="snackbar" :md-duration="4000">
+                <span>If you are about to choose the local staging target, please consider logging out of the project first.</span>
+                <md-button class="md-accent" @click="$refs.snackbar.close()">Close</md-button>
+              </md-snackbar>
             </md-input-container>
             <sync-button
               :topButton="true"
@@ -131,6 +135,9 @@
       },
       getAvatarHQ(avatar) {
         return avatar.replace("32", "100");
+      },
+      openSnackbar() {
+        this.$refs.snackbar.open();
       }
     }
   }

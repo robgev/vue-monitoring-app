@@ -94,6 +94,7 @@ export default {
     background-color: green;
     color: white;
     &:hover {
+      background-color: white;
       color: black;
     }
   }

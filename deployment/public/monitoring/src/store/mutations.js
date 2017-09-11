@@ -17,6 +17,11 @@ const mutations = {
     if(JSON.stringify(projects) !== JSON.stringify(currentCompany.projects)) {
       currentCompany.projects = projects; // Change data in store only if it's really changed. Done to fix a bug of topBar
     }
+  },
+  [types.CHANGE_PROJECT_PROXY] (state, { companyid, projectCode, target }) {
+    const currentCompany = state.companies[companyid];
+    const currentProject = currentCompany.projects[projectCode];
+    currentProject['proxy-target'] = target;
   }
 }
 

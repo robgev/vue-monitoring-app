@@ -28,6 +28,9 @@ const actions = {
   },
   async load_company_projects ({ commit }, { companyid }) {
     commit(types.LOAD_COMPANY_PROJECTS, await loadProjects(companyid))
+  },
+  change_project_proxy ({ commit }, data) {
+    commit(types.CHANGE_PROJECT_PROXY, data)
   }
 }
 

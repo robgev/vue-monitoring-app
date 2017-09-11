@@ -118,8 +118,8 @@
           };
           const promise = await fetch(`http://10.10.1.10:3000/api/${companyid}/projects/${code}/proxy-target`, request_options)
           const result = await promise.json()
-          if(result) {
-            console.log(result)
+          if(result && result.msg === "success") {
+            this.$store.dispatch('change_project_proxy', { companyid, projectCode: code, target })
           }
         }
       },

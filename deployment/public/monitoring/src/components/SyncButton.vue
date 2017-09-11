@@ -41,7 +41,8 @@ export default {
         }),
         body: JSON.stringify(body)
       };
-      const promise = await fetch(`http://10.10.1.10:3000/api/${companyid}/projects/${projectid}/syncup`, request_options)
+      const serverIp = process.env.NODE_ENV !== 'production' ? '10.10.1.10:3000' : '37.252.65.134:85';
+      const promise = await fetch(`http://${serverIp}/api/${companyid}/projects/${projectid}/syncup`, request_options)
       const result = await promise.json()
       if(result) {
         this.isLoading = false;

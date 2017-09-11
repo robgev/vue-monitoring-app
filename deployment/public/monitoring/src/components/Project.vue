@@ -36,7 +36,7 @@
           :latestSuccess="latestSuccess"
           :message="change.push.message"
           :name="change.push.author.name"
-          :avatar="change.push.author.avatar"
+          :avatar="getAvatarHQ(change.push.author.avatar)"
         />
       </div>
     </md-whiteframe>
@@ -122,6 +122,9 @@
             console.log(result)
           }
         }
+      },
+      getAvatarHQ(avatar) {
+        return avatar.replace("32", "100");
       }
     }
   }

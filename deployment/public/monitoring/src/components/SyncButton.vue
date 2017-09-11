@@ -2,7 +2,7 @@
   <div>
   <md-button
     @click="() => checkout(hash)"
-    :disabled="isLoading || (status === 'success' && hash === latestSuccess)"
+    :disabled="isLoading || (hash === latestSuccess && (status === 'success' || status === null))"
     :class="`md-icon-button md-fab md-raised ${computedStatus || 'md-clean'}`"
   >
     <md-icon :class="`${isLoading ? 'animate' : ''}`">sync</md-icon>
@@ -60,7 +60,7 @@ export default {
       if(topButton && latestSuccess === 'latest' && status === 'success') {
         return 'success' // If it's checked button and we sync-ed at least once, then it should be active
       }
-      if(hash === latestSuccess && status === 'success') {
+      if(hash === latestSuccess && (status === 'success' || status === null)) {
         return 'success' // If hashes are matching and the status is success, then that's it
       }
       if(status === 'error') {

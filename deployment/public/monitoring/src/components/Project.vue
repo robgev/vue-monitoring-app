@@ -60,11 +60,12 @@
     async beforeMount() {
       const { companyid } = this.$route.params;
       const companyData = this.$store.state.companies[companyid];
-      const { projects } = companyData
+      const { projects } = companyData;
       if( !Object.keys(projects).length ) {
-        await this.$store.dispatch('load_company_projects', { companyid })
+        await this.$store.dispatch('load_company_projects', { companyid });
+        await this.$store.dispatch('load_project_states', { companyid });
       };
-      this.initializeProjects()
+      this.initializeProjects();
     },
     data() {
       return {
@@ -83,24 +84,28 @@
       initializeProjects() {
         const companyName = this.$route.params.companyid;
         const companyData = this.$store.state.companies[companyName];
-        const { projects } = companyData;
+        const { projects, states } = companyData;
         const defaultProjectName = Object.keys(projects)[0];
         const defaultProject = projects[defaultProjectName];
+        const defaultProjectState = states[defaultProjectName];
         const { changes, 'proxy-target': proxyTarget, 'local-target': localTarget } = defaultProject;
         this.target = proxyTarget;
         this.localTarget = localTarget;
         this.changes = changes;
         this.projects = projects;
+        this.latestSuccess = defaultProjectState;
       },
       updateChanges() {
         const companyName = this.$route.params.companyid;
         const projectName = this.$route.query.code;
         const companyData = this.$store.state.companies[companyName];
-        const { projects } = companyData;
+        const { projects, states } = companyData;
         const { changes, 'proxy-target': proxyTarget, 'local-target': localTarget } = projects[projectName];
+        const projectState = states[projectName];
         this.localTarget = localTarget;
         this.changes = changes;
         this.target = proxyTarget;
+        this.latestSuccess = projectState;
       },
       changeHead(latestHead) {
         this.latestSuccess = latestHead;

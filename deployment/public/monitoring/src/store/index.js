@@ -15,6 +15,7 @@ const state = {
     companies: {
         'hanseaticsoft': {
           projects: {},
+          states: {},
           logoUrl: 'static/img/hs.png'
         }
     }

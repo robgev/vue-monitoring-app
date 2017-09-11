@@ -18,6 +18,10 @@ const mutations = {
       currentCompany.projects = projects; // Change data in store only if it's really changed. Done to fix a bug of topBar
     }
   },
+  [types.LOAD_PROJECT_STATES] (state, { companyid, states }) {
+    const currentCompany = state.companies[companyid];
+    currentCompany.states = states;
+  },
   [types.CHANGE_PROJECT_PROXY] (state, { companyid, projectCode, target }) {
     const currentCompany = state.companies[companyid];
     const currentProject = currentCompany.projects[projectCode];

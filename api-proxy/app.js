@@ -20,6 +20,7 @@ let projectsTargets = {
     '8121': 'https://staging5.cloudfleetmanager.com', // circulars
     '8380': 'https://staging4.cloudfleetmanager.com', // towage
     '8228': 'https://staging4.cloudfleetmanager.com', // employees
+    '8081': 'https://staging4.cloudfleetmanager.com', // for downloading files
     'default': 'https://staging5.cloudfleetmanager.com' // default
 }
 
@@ -79,9 +80,9 @@ app.use('/signalr', signalRProxy(getTarget(), {
 
 app.use('/api', (req, res, next) => {
     
-    const { origin, referer } = req.headers;
+    const { origin, referer, host } = req.headers;
 
-    const port = getPort(origin || referer);
+    const port = getPort(origin || referer || host);
 
     const targetUrl = getTarget(port.toString());
 

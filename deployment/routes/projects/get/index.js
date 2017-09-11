@@ -52,6 +52,9 @@ module.exports.proxyTargets = (req, res) => {
 		return Object.assign({}, targets, { [current.port]: current['proxy-target'] });
 	}, {});
 
+	// for downloading files
+	targets['8081'] = 'https://staging4.cloudfleetmanager.com';
+
 	res.json(targets);
 }
 

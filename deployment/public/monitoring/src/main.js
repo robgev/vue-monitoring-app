@@ -13,7 +13,6 @@ import store from './store';
 import './socket';
 
 Vue.config.productionTip = false;
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
